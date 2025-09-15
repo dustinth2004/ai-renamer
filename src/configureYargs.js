@@ -6,6 +6,10 @@ const { hideBin } = require('yargs/helpers')
 
 const CONFIG_FILE = path.join(os.homedir(), 'ai-renamer.json')
 
+/**
+ * Loads the configuration from the config file.
+ * @returns {Promise<object>} The configuration object.
+ */
 const loadConfig = async () => {
   try {
     const data = await fs.readFile(CONFIG_FILE, 'utf8')
@@ -15,10 +19,20 @@ const loadConfig = async () => {
   }
 }
 
+/**
+ * Saves the configuration to the config file.
+ * @param {object} params - The parameters for saving the config.
+ * @param {object} params.config - The configuration object to save.
+ * @returns {Promise<void>}
+ */
 const saveConfig = async ({ config }) => {
   await fs.writeFile(CONFIG_FILE, JSON.stringify(config, null, 2))
 }
 
+/**
+ * Configures yargs and saves the configuration.
+ * @returns {Promise<{argv: object, config: object}>} The argv and config objects.
+ */
 module.exports = async () => {
   const config = await loadConfig()
 

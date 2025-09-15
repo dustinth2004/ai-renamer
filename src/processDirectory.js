@@ -3,6 +3,13 @@ const fs = require('fs').promises
 
 const processFile = require('./processFile')
 
+/**
+ * Processes a directory, recursively processing files and subdirectories.
+ * @param {object} params - The parameters for processing the directory.
+ * @param {object} params.options - The options for processing files.
+ * @param {string} params.inputPath - The path to the directory.
+ * @returns {Promise<void>}
+ */
 const processDirectory = async ({ options, inputPath }) => {
   try {
     const files = await fs.readdir(inputPath)
