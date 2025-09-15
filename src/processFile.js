@@ -10,6 +10,14 @@ const readFileContent = require('./readFileContent')
 const deleteDirectory = require('./deleteDirectory')
 const isProcessableFile = require('./isProcessableFile')
 
+/**
+ * Processes a single file.
+ * @param {object} options - The options for processing the file.
+ * @param {string} options.filePath - The path to the file.
+ * @param {string} options.inputPath - The input path.
+ * @param {number} options.frames - The number of frames to extract from a video.
+ * @returns {Promise<void>}
+ */
 module.exports = async options => {
   try {
     const { frames, filePath, inputPath } = options

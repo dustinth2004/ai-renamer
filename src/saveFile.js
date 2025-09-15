@@ -1,6 +1,14 @@
 const path = require('path')
 const fs = require('fs').promises
 
+/**
+ * Saves a file with a new name, avoiding collisions.
+ * @param {object} params - The parameters for saving the file.
+ * @param {string} params.ext - The extension of the file.
+ * @param {string} params.newName - The new name of the file.
+ * @param {string} params.filePath - The original path of the file.
+ * @returns {Promise<string>} The new file name.
+ */
 module.exports = async ({ ext, newName, filePath }) => {
   try {
     const dir = path.dirname(filePath)

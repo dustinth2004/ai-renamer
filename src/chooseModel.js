@@ -1,5 +1,11 @@
 const axios = require('axios')
 
+/**
+ * Fetches the available models from the Ollama API.
+ * @param {object} params - The parameters for the API call.
+ * @param {string} params.baseURL - The base URL of the Ollama API.
+ * @returns {Promise<Array<object>>} A list of available models.
+ */
 const ollamaApis = async ({ baseURL }) => {
   try {
     const apiResult = await axios({
@@ -14,6 +20,12 @@ const ollamaApis = async ({ baseURL }) => {
   }
 }
 
+/**
+ * Fetches the available models from the LM Studio API.
+ * @param {object} params - The parameters for the API call.
+ * @param {string} params.baseURL - The base URL of the LM Studio API.
+ * @returns {Promise<Array<object>>} A list of available models.
+ */
 const lmStudioApis = async ({ baseURL }) => {
   try {
     const apiResult = await axios({
@@ -28,6 +40,12 @@ const lmStudioApis = async ({ baseURL }) => {
   }
 }
 
+/**
+ * Lists the available models from the specified provider.
+ * @param {object} options - The options for listing the models.
+ * @param {string} options.provider - The provider to use (ollama, lm-studio, openai).
+ * @returns {Promise<Array<object>>} A list of available models.
+ */
 const listModels = async options => {
   try {
     const { provider } = options
@@ -50,6 +68,11 @@ const listModels = async options => {
   }
 }
 
+/**
+ * Filters the model names from the raw API response.
+ * @param {Array<object>} arr - The array of models from the API.
+ * @returns {Array<object>} A list of models with a 'name' property.
+ */
 const filterModelNames = arr => {
   return arr.map((item) => {
     if (item.id !== undefined) {
@@ -62,6 +85,12 @@ const filterModelNames = arr => {
   })
 }
 
+/**
+ * Chooses a model from the list of available models based on a preferred list.
+ * @param {object} params - The parameters for choosing a model.
+ * @param {Array<object>} params.models - The list of available models.
+ * @returns {string|null} The name of the chosen model, or null if no suitable model is found.
+ */
 const chooseModel = ({ models }) => {
   const preferredModels = [
     'llava',
@@ -84,6 +113,11 @@ const chooseModel = ({ models }) => {
   return models.length > 0 ? models[0].name : null
 }
 
+/**
+ * The main function to choose a model. It lists, filters, and selects a model.
+ * @param {object} options - The options for choosing a model.
+ * @returns {Promise<string>} The name of the chosen model.
+ */
 module.exports = async options => {
   try {
     const _models = await listModels(options)

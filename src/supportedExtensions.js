@@ -1,3 +1,7 @@
+/**
+ * A list of supported file extensions.
+ * @type {Array<string>}
+ */
 module.exports = [
   // general programming languages
   '.js', '.jsx', '.ts', '.tsx', '.py', '.rb', '.php', '.java', '.c', '.cpp',

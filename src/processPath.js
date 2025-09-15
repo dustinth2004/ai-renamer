@@ -4,6 +4,22 @@ const processFile = require('./processFile')
 const chooseModel = require('./chooseModel')
 const processDirectory = require('./processDirectory')
 
+/**
+ * Processes the given path, which can be a file or a directory.
+ * @param {object} params - The parameters for processing the path.
+ * @param {string} params.inputPath - The path to the file or directory.
+ * @param {string} params.defaultCase - The default case style.
+ * @param {string} params.defaultModel - The default model to use.
+ * @param {number} params.defaultChars - The default number of characters for the new name.
+ * @param {number} params.defaultFrames - The default number of frames to extract from videos.
+ * @param {string} params.defaultApiKey - The default API key.
+ * @param {string} params.defaultBaseURL - The default base URL for the API.
+ * @param {string} params.defaultLanguage - The default language for the new name.
+ * @param {string} params.defaultProvider - The default provider.
+ * @param {string} params.defaultCustomPrompt - The default custom prompt.
+ * @param {boolean} params.defaultIncludeSubdirectories - Whether to include subdirectories.
+ * @returns {Promise<void>}
+ */
 module.exports = async ({
   inputPath,
   defaultCase,

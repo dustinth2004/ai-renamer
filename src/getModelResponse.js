@@ -1,6 +1,15 @@
 const fs = require('fs')
 const axios = require('axios')
 
+/**
+ * Gets the model response from the Ollama API.
+ * @param {object} params - The parameters for the API call.
+ * @param {string} params.model - The model to use.
+ * @param {string} params.prompt - The prompt to send to the model.
+ * @param {Array<string>} params.images - A list of paths to images to send to the model.
+ * @param {string} params.baseURL - The base URL of the Ollama API.
+ * @returns {Promise<string>} The response from the model.
+ */
 const ollamaApis = async ({ model, prompt, images, baseURL }) => {
   try {
     const url = `${baseURL}/api/generate`
@@ -31,6 +40,16 @@ const ollamaApis = async ({ model, prompt, images, baseURL }) => {
   }
 }
 
+/**
+ * Gets the model response from the OpenAI or LM Studio API.
+ * @param {object} params - The parameters for the API call.
+ * @param {string} params.model - The model to use.
+ * @param {string} params.prompt - The prompt to send to the model.
+ * @param {Array<string>} params.images - A list of paths to images to send to the model.
+ * @param {string} params.apiKey - The API key for the OpenAI API.
+ * @param {string} params.baseURL - The base URL of the OpenAI or LM Studio API.
+ * @returns {Promise<string>} The response from the model.
+ */
 const openaiApis = async ({ model, prompt, images, apiKey, baseURL }) => {
   try {
     const url = `${baseURL}/v1/chat/completions`
@@ -75,6 +94,12 @@ const openaiApis = async ({ model, prompt, images, apiKey, baseURL }) => {
   }
 }
 
+/**
+ * Gets the model response from the specified provider.
+ * @param {object} options - The options for getting the model response.
+ * @param {string} options.provider - The provider to use (ollama, openai, lm-studio).
+ * @returns {Promise<string>} The response from the model.
+ */
 module.exports = async options => {
   try {
     const { provider } = options

@@ -2,6 +2,12 @@ const path = require('path')
 const fs = require('fs').promises
 const { exec } = require('child_process')
 
+/**
+ * Gets the duration of a video file.
+ * @param {object} params - The parameters for getting the video duration.
+ * @param {string} params.inputFile - The path to the video file.
+ * @returns {Promise<number>} The duration of the video in seconds.
+ */
 const getVideoDuration = ({ inputFile }) => {
   return new Promise((resolve, reject) => {
     exec(`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "${inputFile}"`, (err, stdout) => {
@@ -14,6 +20,14 @@ const getVideoDuration = ({ inputFile }) => {
   })
 }
 
+/**
+ * Extracts frames from a video file.
+ * @param {object} params - The parameters for extracting frames.
+ * @param {number} params.frames - The number of frames to extract.
+ * @param {string} params.inputFile - The path to the video file.
+ * @param {string} params.framesOutputDir - The directory to save the extracted frames.
+ * @returns {Promise<{images: Array<string>, videoPrompt: string}>} An object containing the paths to the extracted frames and a prompt for the video.
+ */
 module.exports = async ({ frames, inputFile, framesOutputDir }) => {
   try {
     await fs.mkdir(framesOutputDir, { recursive: true })

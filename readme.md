@@ -121,6 +121,49 @@ snakeCase: two_words
 trainCase: Two-Words
 ```
 
+## How it Works
+
+`ai-renamer` works by first determining if the given path is a file or a directory.
+
+If it's a directory, it recursively processes all the files in the directory and its subdirectories (if the `--include-subdirectories` flag is set).
+
+For each file, it checks if the file type is supported. If it is, it reads the content of the file. For images and videos, it uses a multimodal model to understand the content. For other files, it reads the text content.
+
+Then, it constructs a prompt with the file content and sends it to the specified AI model. The model returns a new name for the file, which is then used to rename the file.
+
+## Supported File Types
+
+`ai-renamer` supports a wide range of file types, including:
+
+- **General programming languages**: `.js`, `.jsx`, `.ts`, `.tsx`, `.py`, `.rb`, `.php`, `.java`, `.c`, `.cpp`, `.h`, `.hpp`, `.cs`, `.go`, `.rs`, `.swift`, `.kt`, `.scala`, `.groovy`, `.lua`, `.pl`, `.pm`, `.r`, `.dart`, `.f`, `.f90`, `.f95`, `.m`, `.asm`, `.vb`, `.coffee`, `.elm`, `.erl`, `.ex`, `.exs`, `.hs`, `.clj`, `.cljs`
+- **Web development**: `.html`, `.htm`, `.css`, `.scss`, `.sass`, `.less`, `.vue`, `.svelte`
+- **Markup and data**: `.md`, `.markdown`, '.json', '.xml', '.yaml', '.yml', '.csv', '.svg'
+- **Shell and scripting**: `.sh`, `.bash`, `.zsh`, `.fish`, `.ps1`, `.bat`, `.cmd`, `.vbs`
+- **Database and query languages**: `.sql`, `.graphql`, `.gql`
+- **Template languages**: `.ejs`, `.pug`, `.jade`, `.hbs`, `.twig`, `.liquid`
+- **Notebooks**: `.ipynb`
+- **Other**: `.txt`, `.log`, `.diff`, `.patch`, `.proto`, `.tex`
+- **Images**: `.jpg`, `.jpeg`, `.png`, `.bmp`, `.tif`, `.tiff`
+- **Videos**: `.mp4`, `.avi`, `.mov`, `.wmv`, `.flv`, `.mkv`, `.webm`
+- **Documents**: `.pdf`
+
+## Development
+
+To set up the development environment, you need to have Node.js and npm installed.
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ozgrozer/ai-renamer.git
+   ```
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the tool in development mode:
+   ```bash
+   node src/index.js /path/to/files
+   ```
+
 ## Contribution
 
 Feel free to contribute. Open a new [issue](https://github.com/ozgrozer/ai-renamer/issues), or make a [pull request](https://github.com/ozgrozer/ai-renamer/pulls).
